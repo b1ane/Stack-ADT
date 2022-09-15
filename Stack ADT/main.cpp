@@ -6,9 +6,28 @@
 //
 
 #include <iostream>
+using namespace std;
+#include <string>
+#include <sstream>
+#include "stack.h"
 
-int main(int argc, const char * argv[]) {
+
+int main() {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    //take in infix-notation equation as string  input
+    
+    string input;
+    getline(cin, input);
+    
+    stack first;
+    first.push("g");
+    first.push("o");
+    first.push("d");
+    
+    first.print();
+    cout << endl;
+    
+    
+    
     return 0;
 }
