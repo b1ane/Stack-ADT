@@ -12,7 +12,7 @@
 using namespace std;
 
 struct node {
-    char inp;
+    char data;
     node* next;
 };
 
@@ -27,7 +27,7 @@ public:
     
     //returns value at front of list
     void top() {
-        cout<< tp->inp << endl;
+        cout<< tp->data << endl;
     }
     
     
@@ -35,17 +35,25 @@ public:
     void push(char val) {
         //new node is create, stores value passed as parameter
         node* newNode = new node;
-        newNode->inp = val;
+        newNode->data = val;
         //top is to value passed
         newNode->next = tp;
         tp = newNode;
+    }
+    
+    //deletes value at front of list
+    void pop() {
+        node* temp = new node;
+        temp = tp; //equal to first val
+        tp = tp->next;
+        delete temp;
     }
     
     void print() {
         node* cu = tp;
         
         while(cu!=nullptr) {
-            cout << cu->inp;
+            cout << cu->data;
             cu = cu->next;
         }
     }

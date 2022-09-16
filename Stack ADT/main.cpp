@@ -11,6 +11,17 @@ using namespace std;
 #include <sstream>
 #include "stack.h"
 
+//checks if charcter in string is digit
+bool isOperand(char o) {
+    if( o == '0' || o == '1' ||o == '2'|| o == '3'|| o == '4'|| o == '5'|| o == '6'|| o == '7'|| o == '8'|| o == '9') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
 
 int main() {
     // insert code here...
@@ -22,6 +33,7 @@ int main() {
     stack digits; //holds operands
     stack ops;    //holds operators
     
+    
     //loops through entire equation
     for( int i  = 0; i < input.size(); i++) {
         //if value in string is a number -- push to digits
@@ -32,11 +44,15 @@ int main() {
             ops.push(input.at(i));
         }
     }
+     
+    
     
     digits.print();
     cout << endl;
+    
     ops.print();
     cout << endl;
+
     
     
     
