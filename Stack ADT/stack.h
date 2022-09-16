@@ -12,7 +12,7 @@
 using namespace std;
 
 struct node {
-    string inp;
+    char inp;
     node* next;
 };
 
@@ -32,7 +32,7 @@ public:
     
     
     //insert value at front of list;
-    void push(string val) {
+    void push(char val) {
         //new node is create, stores value passed as parameter
         node* newNode = new node;
         newNode->inp = val;

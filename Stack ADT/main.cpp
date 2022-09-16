@@ -19,12 +19,23 @@ int main() {
     string input;
     getline(cin, input);
     
-    stack first;
-    first.push("g");
-    first.push("o");
-    first.push("d");
+    stack digits; //holds operands
+    stack ops;    //holds operators
     
-    first.print();
+    //loops through entire equation
+    for( int i  = 0; i < input.size(); i++) {
+        //if value in string is a number -- push to digits
+        if( input.at(i) == '0' || input.at(i) == '1' ||input.at(i) == '2'||input.at(i) == '3'||input.at(i) == '4'||input.at(i) == '5'||input.at(i) == '6'||input.at(i) == '7'||input.at(i) == '8'||input.at(i) == '9') {
+            digits.push(input.at(i));
+        }
+        else { //push to ops
+            ops.push(input.at(i));
+        }
+    }
+    
+    digits.print();
+    cout << endl;
+    ops.print();
     cout << endl;
     
     
