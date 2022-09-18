@@ -50,7 +50,12 @@ public:
     }
     
     bool isEmpty() {
-        return top;
+        if(top==nullptr) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     void print() {
@@ -88,9 +93,10 @@ public:
     
     
     
-    void infixTprefix(stack p, stack &o, stack &st) {
+    void infixTprefix(stack pref, stack &o, stack &st) {
         //new node created set equal to top node
-        node* t = p.top;
+        node* t = pref.top;
+        
         
         //scanning
         while(t!=nullptr) {
@@ -98,27 +104,34 @@ public:
             if (isOperand(t->data)) {
                 o.push(t->data);
             }
-            //if it is NOT digit
-            if (!isOperand(t->data)){
-                //if stack is empty, push to stack
-                if(!st.isEmpty()) {
+            else {
+                //if the stack is empty -- push operator to stack
+                if(st.isEmpty()) {
                     st.push(t->data);
                 }
-                //if operator has a higher precedence, push to stack
-                //compare operator to stack's top operator
-                if ( Hprecedence(t->data) > Hprecedence(st.Top()) ) {
-                    st.push(t->data);
-                }
-                if ( Hprecedence(t->data) < Hprecedence(st.Top())) {
-                    //push operator at top of stack to output
-                    o.push(st.Top());
-                    //pop operator
-                    st.pop();
-                    //push to stack
-                    st.push(t->data);
+                else {
+                    if(Hprecedence(t->data) >= Hprecedence(st.Top())) {
+                        st.push(t->data);
+                    }
+                    //has lower precedence than operator on top of stack
+                    if(Hprecedence(t->data) < Hprecedence(st.Top())) {
+                        //until stack is empty
+                        //or until operator on top of stack is lower than character passed
+                        while(!st.isEmpty() && Hprecedence(st.Top()) > Hprecedence(t->data)) {
+                            o.push(st.Top());
+                            st.pop();
+                        }
+                        st.push(t->data);
+                    }
                 }
             }
             t = t->next;
+        }
+        
+        //push rest of stack to output
+        while(!st.isEmpty()){
+            o.push(st.Top());
+            st.pop();
         }
     }
 };

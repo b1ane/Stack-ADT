@@ -28,17 +28,15 @@ int main() {
         prefix.push(input.at(i));
     }
     
-    prefix.print(); //outputs entire prefix equation
-    cout << endl;
-    
     stack st;
     
     output.infixTprefix(prefix,output,st);
-    output.print();
-    cout << endl;
+    cout << "Stack: ";
     st.print();
     cout << endl;
-    
+    cout << "Output: ";
+    output.print();
+    cout << endl;
     
     
     return 0;
