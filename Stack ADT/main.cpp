@@ -69,6 +69,67 @@ string infixTpost(string inp) {
     return output;
 }
 
+string infixTprefix(string inp) {
+    string newString="";
+    string output ="";
+    stack st;
+    stack o;
+    //scanning
+    //reverses string then places in output string
+    stack on;
+    for( int i = 0; i < inp.length(); i++) {
+        on.push(inp[i]);
+        //newString+=on.Top();
+    }
+    
+    while(!on.isEmpty()) {
+        newString+=on.Top();
+        on.pop();
+    }
+    
+    //evaluating string
+    for( int i = 0; i < newString.length(); i++ ) {
+        //push to output if it is a digit -- reverses the equation
+        if (isOperand(newString[i])) {
+            output+=newString[i];
+        }
+        else {
+            //if the stack is empty -- push operator to stack
+            if(st.isEmpty()) {
+                st.push(newString[i]);
+            }
+            else {
+                if(Hprecedence(newString[i]) >= Hprecedence(st.Top())) {
+                    st.push(newString[i]);
+                }
+                //has lower precedence than operator on top of stack
+                if(Hprecedence(newString[i]) < Hprecedence(st.Top())) {
+                    //until stack is empty
+                    //or until operator on top of stack is lower than character passed
+                    while(!st.isEmpty() && Hprecedence(st.Top()) > Hprecedence(newString[i])) {
+                        output+=st.Top();
+                        //o.push(st.Top());
+                        st.pop();
+                    }
+                    st.push(newString[i]);
+                }
+            }
+        }
+    }
+    //push rest of stack to output
+    while(!st.isEmpty()){
+        output+=st.Top();
+        //o.push(st.Top());
+        st.pop();
+    }
+    
+    
+    
+    return output;
+}
+
+
+
 
 int main() {
     // insert code here...
@@ -94,6 +155,9 @@ int main() {
     //stack post;
     cout << "POSTFIX AS STRING: ";
     cout << infixTpost(input) << endl;
+    
+    cout << "PREFIX AS STRING: ";
+    cout << infixTprefix(input) << endl;
     
     return 0;
 }
