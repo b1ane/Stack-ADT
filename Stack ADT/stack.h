@@ -87,7 +87,7 @@ public:
             cu = cu->next;
         }
     }
-    
+ /*
     //checks if charcter in string is digit
     bool isOperand(char o) {
         if( o == '0' || o == '1' ||o == '2'|| o == '3'|| o == '4'|| o == '5'|| o == '6'|| o == '7'|| o == '8'|| o == '9') {
@@ -97,7 +97,8 @@ public:
             return false;
         }
     }
-    
+  */
+ /*
     //checks precedence for operators
     int Hprecedence(char o) {
         //if op is mult/div, has higher precedence
@@ -111,7 +112,8 @@ public:
             return 0;
         }
     }
-    
+*/
+/*
     //convert equation to prefix
     void infixTprefix(stack pref, stack &o, stack &st) {
         //new node created set equal to top node
@@ -151,8 +153,8 @@ public:
             st.pop();
         }
     }
-    
-    
+*/
+/*
     //convert equation to postfix
     string infixTpost(string inp) {
         string output;
@@ -192,7 +194,7 @@ public:
         cout << endl;
         return output;
     }
-    
+*/
     
     
 };
