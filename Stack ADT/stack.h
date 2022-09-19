@@ -41,6 +41,26 @@ public:
         top = newNode;
     }
     
+    //insert value at back
+    void insert(char val) {
+        node* newNode = new node;
+        newNode->data = val;
+        newNode -> next = nullptr;
+        if(isEmpty()) {
+              top = newNode;
+            }
+            else {
+              // loop until last node is reached, add new node there
+              node* cur = top; //cur stores value of head
+
+              // loop until last node is reached
+              while( cur->next != nullptr) {
+                cur = cur -> next;
+              }
+              cur->next = newNode;
+            }
+    }
+    
     //deletes value at front of list
     void pop() {
         node* temp = new node;
@@ -49,6 +69,7 @@ public:
         delete temp;
     }
     
+    //returns true if stack is empty
     bool isEmpty() {
         if(top==nullptr) {
             return true;
@@ -91,13 +112,10 @@ public:
         }
     }
     
-    
-    
+    //convert equation to prefix
     void infixTprefix(stack pref, stack &o, stack &st) {
         //new node created set equal to top node
         node* t = pref.top;
-        
-        
         //scanning
         while(t!=nullptr) {
             //if it is a digit -- push to output
@@ -127,13 +145,60 @@ public:
             }
             t = t->next;
         }
-        
         //push rest of stack to output
         while(!st.isEmpty()){
             o.push(st.Top());
             st.pop();
         }
     }
+    
+    
+    //convert equation to postfix
+    string infixTpost(string inp) {
+        string output;
+        stack o;
+        stack st;
+        
+        for(int i = 0; i < inp.length(); i++) {
+            //if a digit - insert digit to stack object (at front)
+            if(isOperand(inp[i])) {
+                o.insert(inp[i]);
+            }
+            else {
+                //if stack is empty - push operator to stack
+                if(st.isEmpty()) {
+                    st.push(inp[i]);
+                }
+                else {
+                    //if operator has lower precedence than top stack
+                    if(Hprecedence(inp[i]) <= Hprecedence(st.Top()) ) {
+                        //add operator to output
+                        o.insert(st.Top());
+                        //pop top value form stack
+                        st.pop();
+                        //add inp operator to stack
+                        st.push(inp[i]);
+                    }
+                    //if operator has higher precedence than top
+                    if(Hprecedence(inp[i]) > Hprecedence(st.Top())) {
+                        //push to top of stack
+                        st.push(inp[i]);
+                    }
+                }
+                
+            }
+        }
+        cout << "OUTPUT: ";
+        o.print();
+        cout << endl;
+        cout << "STACK: ";
+        st.print();
+        cout << endl;
+        return output;
+    }
+    
+    
+    
 };
 
 #endif /* stack_h */

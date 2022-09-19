@@ -10,6 +10,7 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include "stack.h"
+#include <cstring>
 
 
 
@@ -18,26 +19,25 @@ int main() {
     //take in infix-notation equation as string  input
     
     string input;
-    getline(cin, input);
+    cin >> input;
     
     stack prefix;
     stack output;
     
     //loops through entire equation, pushes all values to prefix stack
-    for( int i  = 0; i < input.size(); i++) {
-        prefix.push(input.at(i));
+    for( int i  = 0; i < input.length(); i++) {
+        prefix.push(input[i]);
     }
     
     stack st;
-    
     output.infixTprefix(prefix,output,st);
-    cout << "Stack: ";
-    st.print();
-    cout << endl;
-    cout << "Output: ";
+    cout << "PREFIX: ";
     output.print();
     cout << endl;
     
+    stack post;
+    
+    cout << post.infixTpost(input) << endl;
     
     return 0;
 }
