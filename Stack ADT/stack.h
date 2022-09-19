@@ -170,23 +170,19 @@ public:
                     st.push(inp[i]);
                 }
                 else {
-                    //if operator has lower precedence than top stack
-                    if(Hprecedence(inp[i]) <= Hprecedence(st.Top()) ) {
-                        //add operator to output
+                    while(!st.isEmpty() && (Hprecedence(inp[i]) <= Hprecedence(st.Top()))) {
                         o.insert(st.Top());
-                        //pop top value form stack
                         st.pop();
-                        //add inp operator to stack
-                        st.push(inp[i]);
                     }
-                    //if operator has higher precedence than top
-                    if(Hprecedence(inp[i]) > Hprecedence(st.Top())) {
-                        //push to top of stack
-                        st.push(inp[i]);
-                    }
+                    st.push(inp[i]);
                 }
                 
             }
+        }
+        
+        while(!st.isEmpty()) {
+            o.insert(st.Top());
+            st.pop();
         }
         cout << "OUTPUT: ";
         o.print();
