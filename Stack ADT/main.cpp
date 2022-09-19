@@ -123,9 +123,18 @@ string infixTprefix(string inp) {
         st.pop();
     }
     
+    string revO;
+    stack x;
+    for( int i = 0; i < output.length(); i++ ){
+        x.push(output[i]);
+    }
+    while(!x.isEmpty()) {
+        revO+=x.Top();
+        x.pop();
+    }
     
     
-    return output;
+    return revO;
 }
 
 
