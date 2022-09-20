@@ -12,6 +12,7 @@
 using namespace std;
 
 struct node {
+    int digi;
     char data;
     node* next;
 };
@@ -19,15 +20,21 @@ struct node {
 class stack {
 private:
     node* top; //points to first element in stack
+    node* itop;
 
 public:
     stack() { //constructor
         top = nullptr;
+        itop = nullptr;
     }
     
     //returns value at front of list
     char Top() {
         return  top->data;
+    }
+    
+    int iTop() {
+        return itop->digi;
     }
     
     
@@ -39,6 +46,13 @@ public:
         //top is to value passed
         newNode->next = top;
         top = newNode;
+    }
+    
+    void iPush(int num) {
+        node* newNode = new node;
+        newNode->digi = num;
+        newNode ->next = itop;
+        itop = newNode;
     }
     
     //insert value at back
@@ -69,6 +83,13 @@ public:
         delete temp;
     }
     
+    void iPop() {
+        node* temp = new node;
+        temp = itop;
+        itop = itop->next;
+        delete temp;
+    }
+    
     //returns true if stack is empty
     bool isEmpty() {
         if(top==nullptr) {
@@ -87,115 +108,14 @@ public:
             cu = cu->next;
         }
     }
- /*
-    //checks if charcter in string is digit
-    bool isOperand(char o) {
-        if( o == '0' || o == '1' ||o == '2'|| o == '3'|| o == '4'|| o == '5'|| o == '6'|| o == '7'|| o == '8'|| o == '9') {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-  */
- /*
-    //checks precedence for operators
-    int Hprecedence(char o) {
-        //if op is mult/div, has higher precedence
-        if( o == '*' || o == '/' ) {
-            return 2;
-        }
-        if ( o == '+' || o == '-') {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-*/
-/*
-    //convert equation to prefix
-    void infixTprefix(stack pref, stack &o, stack &st) {
-        //new node created set equal to top node
-        node* t = pref.top;
-        //scanning
-        while(t!=nullptr) {
-            //if it is a digit -- push to output
-            if (isOperand(t->data)) {
-                o.push(t->data);
-            }
-            else {
-                //if the stack is empty -- push operator to stack
-                if(st.isEmpty()) {
-                    st.push(t->data);
-                }
-                else {
-                    if(Hprecedence(t->data) >= Hprecedence(st.Top())) {
-                        st.push(t->data);
-                    }
-                    //has lower precedence than operator on top of stack
-                    if(Hprecedence(t->data) < Hprecedence(st.Top())) {
-                        //until stack is empty
-                        //or until operator on top of stack is lower than character passed
-                        while(!st.isEmpty() && Hprecedence(st.Top()) > Hprecedence(t->data)) {
-                            o.push(st.Top());
-                            st.pop();
-                        }
-                        st.push(t->data);
-                    }
-                }
-            }
-            t = t->next;
-        }
-        //push rest of stack to output
-        while(!st.isEmpty()){
-            o.push(st.Top());
-            st.pop();
-        }
-    }
-*/
-/*
-    //convert equation to postfix
-    string infixTpost(string inp) {
-        string output;
-        stack o;
-        stack st;
-        
-        for(int i = 0; i < inp.length(); i++) {
-            //if a digit - insert digit to stack object (at front)
-            if(isOperand(inp[i])) {
-                o.insert(inp[i]);
-            }
-            else {
-                //if stack is empty - push operator to stack
-                if(st.isEmpty()) {
-                    st.push(inp[i]);
-                }
-                else {
-                    while(!st.isEmpty() && (Hprecedence(inp[i]) <= Hprecedence(st.Top()))) {
-                        o.insert(st.Top());
-                        st.pop();
-                    }
-                    st.push(inp[i]);
-                }
-                
-            }
-        }
-        
-        while(!st.isEmpty()) {
-            o.insert(st.Top());
-            st.pop();
-        }
-        cout << "OUTPUT: ";
-        o.print();
-        cout << endl;
-        cout << "STACK: ";
-        st.print();
-        cout << endl;
-        return output;
-    }
-*/
     
+    void iPrint() {
+        node* cu = itop;
+        while (cu!=nullptr) {
+            cout << cu->digi;
+            cu = cu->next;
+        }
+    }
     
 };
 

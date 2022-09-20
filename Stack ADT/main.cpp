@@ -10,7 +10,8 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include "stack.h"
-#include <cstring>
+#include <vector>
+
 
 //checks if charcter in string is digit
 bool isOperand(char o) {
@@ -138,6 +139,24 @@ string infixTprefix(string inp) {
 }
 
 
+int eval(string post) {
+    stack st;
+    
+    for( int i = 0; i < post.length(); i++ ) {
+        //push to stack if operand
+        if (isOperand(post[i])) {
+            int lol = post[i] - '0';
+            st.iPush(lol);
+        }
+    }
+    
+    st.iPrint();
+    cout << endl;
+    
+    
+    return 1;
+}
+
 
 
 int main() {
@@ -146,27 +165,17 @@ int main() {
     
     string input;
     cin >> input;
+
+    cout << "PREFIX AS STRING: ";
+    cout << infixTprefix(input) << endl;
     
-    //stack prefix;
-    //stack output;
-    
-    //loops through entire equation, pushes all values to prefix stack
-    //for( int i  = 0; i < input.length(); i++) {
-        //prefix.push(input[i]);
-    //}
-    
-    //stack st;
-    //output.infixTprefix(prefix,output,st);
-    //cout << "PREFIX: ";
-    //output.print();
-    //cout << endl;
-    
-    //stack post;
     cout << "POSTFIX AS STRING: ";
     cout << infixTpost(input) << endl;
     
-    cout << "PREFIX AS STRING: ";
-    cout << infixTprefix(input) << endl;
+    cout << "POSTFIX EVAL: ";
+    cout << eval(infixTprefix(input)) << endl;
+    
+    
     
     return 0;
 }
