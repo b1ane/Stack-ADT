@@ -140,21 +140,21 @@ string infixTprefix(string inp) {
 }
 
 int op(int a, int b, char o) {
-    if (o == '+') {
-        return a+b;
-    }
-    else if (o == '-') {
-        return a-b;
-    }
-    else if (o == '*') {
-        return a*b;
-    }
-    else if (o == '/') {
-        return a/b;
-    }
-    else {
-        return 0;
-    }
+    int result = 0;
+    
+    switch (o){
+          case '+':
+            result = (a + b);
+            break;
+          case '-':
+            result = a - b;
+            break;
+          case '*':
+            result = a * b;
+            break;
+       }
+    
+    return result;
     
 }
 
@@ -162,20 +162,25 @@ int op(int a, int b, char o) {
 
 int eval(string post) {
     nStack st; //stack of ints
-    stack ops; //stack of operators
     
     for( int i = 0; i < post.length(); i++ ) {
         if (isOperand(post[i])) {
-            int lol = post[i] - '0';
-            st.push(lol);
+            int num = post[i] - '0';
+            st.push(num);
+        }
+        if (!isOperand(post[i])) {
+            int a = st.Top();
+            st.pop();
+            cout << a << endl;
+            int b = st.Top();
+            cout << b << endl;
+            st.pop();
+            int x = op(a, b, post[i]);
+            st.push(x);
         }
     }
     
-    st.print();
-    cout << endl;
-    
-    
-    return 1;
+    return st.Top();
 }
 
 
@@ -184,7 +189,7 @@ int eval(string post) {
 int main() {
     // insert code here...
     //take in infix-notation equation as string  input
-    
+    /*
     string input;
     cin >> input;
 
@@ -195,8 +200,10 @@ int main() {
     cout << infixTpost(input) << endl;
     
     string x = infixTprefix(input);
+    */
+    
     cout << "POSTFIX EVAL: ";
-    cout << eval(x) << endl;
+    cout << eval("234*+") << endl;
     
     
     

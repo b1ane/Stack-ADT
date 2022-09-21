@@ -25,7 +25,13 @@ public:
     }
     
     int Top() {
-        return top->data;
+        //if list is not empty -- return value on top
+        if (!isEmpty()) {
+            return top->data;
+        }
+        else {
+            return 0;
+        }
     }
     
     void push(int val) {
@@ -41,10 +47,12 @@ public:
     }
     
     void pop() {
-        nNode* temp = new nNode;
-        temp = top;
-        top=top->next;
-        delete temp;
+        if (!isEmpty()) {
+            nNode* temp = new nNode;
+            temp = top;
+            top=top->next;
+            delete temp;
+        }
     }
     
     bool isEmpty() {
