@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A63BDCE928DB995000AEC6CF /* nStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nStack.h; sourceTree = "<group>"; };
 		A6D4AA5B28D28F2F0007EF57 /* Stack ADT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Stack ADT"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D4AA5E28D28F2F0007EF57 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A6D4AA6528D28F490007EF57 /* stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				A6D4AA5E28D28F2F0007EF57 /* main.cpp */,
+				A63BDCE928DB995000AEC6CF /* nStack.h */,
 				A6D4AA6528D28F490007EF57 /* stack.h */,
 			);
 			path = "Stack ADT";

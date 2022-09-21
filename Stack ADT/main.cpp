@@ -11,6 +11,7 @@ using namespace std;
 #include <sstream>
 #include "stack.h"
 #include <vector>
+#include "nStack.h"
 
 
 //checks if charcter in string is digit
@@ -138,24 +139,45 @@ string infixTprefix(string inp) {
     return revO;
 }
 
+int op(int a, int b, char o) {
+    if (o == '+') {
+        return a+b;
+    }
+    else if (o == '-') {
+        return a-b;
+    }
+    else if (o == '*') {
+        return a*b;
+    }
+    else if (o == '/') {
+        return a/b;
+    }
+    else {
+        return 0;
+    }
+    
+}
+
+
 
 int eval(string post) {
-    stack st;
+    nStack st; //stack of ints
+    stack ops; //stack of operators
     
     for( int i = 0; i < post.length(); i++ ) {
-        //push to stack if operand
         if (isOperand(post[i])) {
             int lol = post[i] - '0';
-            st.iPush(lol);
+            st.push(lol);
         }
     }
     
-    st.iPrint();
+    st.print();
     cout << endl;
     
     
     return 1;
 }
+
 
 
 
@@ -172,8 +194,9 @@ int main() {
     cout << "POSTFIX AS STRING: ";
     cout << infixTpost(input) << endl;
     
+    string x = infixTprefix(input);
     cout << "POSTFIX EVAL: ";
-    cout << eval(infixTprefix(input)) << endl;
+    cout << eval(x) << endl;
     
     
     
